@@ -1,0 +1,30 @@
+# Compiler and flags
+CC = gcc
+CFLAGS = -Wall -Wextra -g
+
+# Source files
+SRCS = main.c game.c map.c player.c
+
+# Object files
+OBJS = $(SRCS:.c=.o)
+
+# Output executable
+EXEC = game
+
+# Default target: compile the program
+all: $(EXEC)
+
+# Create the executable
+$(EXEC): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(EXEC)
+
+# Compile .c files into .o files
+%.o: %.c %.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Clean up build artifacts
+clean:
+	rm -f $(OBJS) $(EXEC)
+
+# Rebuild the entire project
+rebuild: clean all
